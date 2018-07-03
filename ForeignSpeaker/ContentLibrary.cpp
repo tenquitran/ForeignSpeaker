@@ -95,7 +95,7 @@ bool ContentLibrary::parseDialogFiles(const std::wstring& directoryPath)
 	{
 		if (WAIT_TIMEOUT != WaitForSingleObject(g_hExitEvent, 0))
 		{
-			return false;
+			return true;    // not an error
 		}
 
 		if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
@@ -159,7 +159,7 @@ bool ContentLibrary::parseFile(const std::wstring& filePath)
 	{
 		if (WAIT_TIMEOUT != WaitForSingleObject(g_hExitEvent, 0))
 		{
-			return false;
+			return true;    // not an error
 		}
 
 		if (line.empty())

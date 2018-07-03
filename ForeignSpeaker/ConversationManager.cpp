@@ -54,17 +54,23 @@ DWORD WINAPI ConversationManager::threadProcParse(PVOID pParam)
 
 DWORD ConversationManager::threadProcParse()
 {
-	// TODO: track state of g_hExitEvent
-
 	// TODO: report progress (directory name or path, etc.)
 
-#if 0
-	// TODO: hard-coded
-	m_contentLibrary.parseDialogFiles(L"D:\\natProgs\\utilities\\ForeignSpeakerWinApi\\content");
-#endif
+	// TODO: hard-coded path
+	std::wstring dirPath = L"D:\\natProgs\\utilities\\ForeignSpeakerWinApi\\content";
 
-	// TODO: stub
-	return 1;
+	if (!m_contentLibrary.parseDialogFiles(dirPath))
+	{
+		std::wcerr << L"Failed to parse dialog files: " << dirPath << '\n';
+		return 1;
+	}
+
+	if (WAIT_TIMEOUT != WaitForSingleObject(g_hExitEvent, 0))
+	{
+		return 0;    // not an error
+	}
+
+	return 0;
 }
 
 void ConversationManager::playDialog(const Dialog& dlg) const
