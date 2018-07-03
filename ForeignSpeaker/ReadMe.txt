@@ -15,21 +15,21 @@ Files are supposed to be created by the user according to his/her needs.
 
 A sample file containing two dialogs:
 
-`***`
+***
 
 A: Hello, Robert!
 B: Hello, Stanley!
 A: How are you?
 B: Fine, thanks! And you?
 
-`***`
+***
 
 A: Hello, Sarah!
 B: Hello, Will!
 A: How are you?
 B: Fine, thanks! And you?
 
-`***`
+***
 
 ---------------------------------------------------------
 

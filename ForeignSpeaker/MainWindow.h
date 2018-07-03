@@ -40,6 +40,7 @@ namespace ForeignSpeakerApp
 		int m_clientWidth;
 		int m_clientHeight;
 
-		ContentLibrary m_contentLibrary;
+		// Controls the main application logic.
+		ConversationManager m_conversationMgr;
 	};
 }

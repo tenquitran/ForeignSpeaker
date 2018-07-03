@@ -8,6 +8,11 @@ using namespace ForeignSpeakerApp;
 
 //////////////////////////////////////////////////////////////////////////
 
+// "Exit application" event.
+extern CHandle g_hExitEvent;
+
+//////////////////////////////////////////////////////////////////////////
+
 
 MainWindow::MainWindow(HINSTANCE hInstance, int nCmdShow, int clientWidth, int clientHeight)
 	: m_hAppInstance(hInstance), m_hMainWindow(nullptr),
@@ -142,6 +147,8 @@ LRESULT CALLBACK MainWindow::mainWndProc(HWND hWnd, UINT message, WPARAM wParam,
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
+		SetEvent(g_hExitEvent);
+
 		PostQuitMessage(0);
 		break;
 	default:

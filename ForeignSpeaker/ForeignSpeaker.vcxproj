@@ -80,24 +80,28 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentLibrary.h" />
+    <ClInclude Include="ConversationManager.h" />
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="FileFindWrapper.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sentence.h" />
+    <ClInclude Include="Speaker.h" />
     <ClInclude Include="SpeakerRole.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentLibrary.cpp" />
+    <ClCompile Include="ConversationManager.cpp" />
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="FileFindWrapper.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Sentence.cpp" />
+    <ClCompile Include="Speaker.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

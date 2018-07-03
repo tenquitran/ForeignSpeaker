@@ -17,6 +17,8 @@ namespace ForeignSpeakerApp
 
 		ESpeakerRole getRole() const;
 
+		bool isValid() const;
+
 	private:
 		std::wstring m_text;
 

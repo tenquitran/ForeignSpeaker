@@ -33,3 +33,9 @@ ESpeakerRole Sentence::getRole() const
 {
 	return m_role;
 }
+
+bool Sentence::isValid() const
+{
+	return (    ESpeakerRole::Undefined != m_role
+			&& !m_text.empty());
+}

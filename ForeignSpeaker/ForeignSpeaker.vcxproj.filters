@@ -54,6 +54,12 @@
     <ClInclude Include="ContentLibrary.h">
       <Filter>MainLogic</Filter>
     </ClInclude>
+    <ClInclude Include="Speaker.h">
+      <Filter>MainLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversationManager.h">
+      <Filter>MainLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +84,12 @@
       <Filter>MainLogic</Filter>
     </ClCompile>
     <ClCompile Include="ContentLibrary.cpp">
+      <Filter>MainLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Speaker.cpp">
+      <Filter>MainLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversationManager.cpp">
       <Filter>MainLogic</Filter>
     </ClCompile>
   </ItemGroup>

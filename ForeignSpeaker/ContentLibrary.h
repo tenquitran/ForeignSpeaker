@@ -16,13 +16,14 @@ namespace ForeignSpeakerApp
 
 		virtual ~ContentLibrary();
 
-		DialogItr cbegin() const;
-		DialogItr cend() const;
-
-	private:
 		// Parse the files that contain dialogs.
 		bool parseDialogFiles(const std::wstring& directoryPath);
 
+		size_t getDialogCount() const;
+
+		Dialog operator[](size_t index) const;
+
+	private:
 		bool parseFile(const std::wstring& filePath);
 
 		// Remove line prefix, if any.

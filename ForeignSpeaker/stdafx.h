@@ -26,6 +26,8 @@
 #include <string>
 #include <vector>
 
+#include <atlbase.h>
+
 #include "Exception.h"
 #include "FileFindWrapper.h"
 
@@ -33,3 +35,7 @@
 #include "Sentence.h"
 #include "Dialog.h"
 #include "ContentLibrary.h"
+
+#include "Speaker.h"
+
+#include "ConversationManager.h"

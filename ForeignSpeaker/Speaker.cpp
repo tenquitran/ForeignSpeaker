@@ -1,0 +1,22 @@
+#include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////
+
+using namespace ForeignSpeakerApp;
+
+//////////////////////////////////////////////////////////////////////////
+
+
+Speaker::Speaker()
+{
+}
+
+Speaker::~Speaker()
+{
+}
+
+void Speaker::speak(const std::wstring& phrase) const
+{
+	// TODO: stub
+	assert(false);
+}

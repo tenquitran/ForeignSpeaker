@@ -6,6 +6,9 @@ using namespace ForeignSpeakerApp;
 
 //////////////////////////////////////////////////////////////////////////
 
+// "Exit application" event.
+extern CHandle g_hExitEvent;
+
 // If the file includes several dialogs, they should be separated by this string.
 const wchar_t DialogSeparator[] = L"***";
 
@@ -18,7 +21,7 @@ const wchar_t NamePrefixSentinel[] = L": ";
 
 ContentLibrary::ContentLibrary()
 {
-#if 1
+#if 0
 	// TODO: temp
 	parseDialogFiles(L"D:\\natProgs\\utilities\\ForeignSpeakerWinApi\\content");
 #endif
@@ -59,14 +62,19 @@ ContentLibrary::~ContentLibrary()
 {
 }
 
-ContentLibrary::DialogItr ContentLibrary::cbegin() const
+size_t ContentLibrary::getDialogCount() const
 {
-	return m_dialogs.cbegin();
+	return m_dialogs.size();
 }
 
-ContentLibrary::DialogItr ContentLibrary::cend() const
+Dialog ContentLibrary::operator[](size_t index) const
 {
-	return m_dialogs.cend();
+	if (index >= m_dialogs.size())
+	{
+		assert(false); return Dialog();
+	}
+
+	return m_dialogs[index];
 }
 
 bool ContentLibrary::parseDialogFiles(const std::wstring& directoryPath)
@@ -85,6 +93,11 @@ bool ContentLibrary::parseDialogFiles(const std::wstring& directoryPath)
 
 	do
 	{
+		if (WAIT_TIMEOUT != WaitForSingleObject(g_hExitEvent, 0))
+		{
+			return false;
+		}
+
 		if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 		{   // Directories
 
@@ -144,13 +157,18 @@ bool ContentLibrary::parseFile(const std::wstring& filePath)
 
 	while (getline(inFile, line))
 	{
+		if (WAIT_TIMEOUT != WaitForSingleObject(g_hExitEvent, 0))
+		{
+			return false;
+		}
+
 		if (line.empty())
 		{
 			continue;
 		} 
 		else if (-1 != line.find(DialogSeparator))    // next dialog in the file
 		{
-			if (!dlg.empty())
+			if (!dlg.isEmpty())
 			{
 				m_dialogs.emplace_back(dlg);
 			}
@@ -169,7 +187,7 @@ bool ContentLibrary::parseFile(const std::wstring& filePath)
 #endif
 	}
 
-	if (!dlg.empty())
+	if (!dlg.isEmpty())
 	{
 		m_dialogs.emplace_back(dlg);
 	}

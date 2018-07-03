@@ -3,6 +3,7 @@
 
 namespace ForeignSpeakerApp
 {
+	// Sentences making a dialog.
 	class Dialog
 	{
 		typedef std::vector<Sentence> SentenceColl;
@@ -17,12 +18,13 @@ namespace ForeignSpeakerApp
 
 		void addSentence(const std::wstring& text);
 
-		bool empty() const;
+		bool isEmpty() const;
 
 		void clear();
 
-		SentenceItr cbegin() const;
-		SentenceItr cend() const;
+		size_t getSentenceCount() const;
+
+		Sentence operator[](size_t index) const;
 
 	private:
 		SentenceColl m_sentences;

@@ -17,6 +17,11 @@ Dialog::~Dialog()
 
 void Dialog::addSentence(const std::wstring& text)
 {
+	if (text.empty())
+	{
+		assert(false); return;
+	}
+
 	// For simple two-person dialogs, we can "flip" the speaker role for the next sentence 
 	// instead of passing the speaker role as an argument.
 
@@ -27,7 +32,7 @@ void Dialog::addSentence(const std::wstring& text)
 	lastRole = (ESpeakerRole::A == lastRole ? ESpeakerRole::B : ESpeakerRole::A);
 }
 
-bool Dialog::empty() const
+bool Dialog::isEmpty() const
 {
 	return m_sentences.empty();
 }
@@ -37,12 +42,17 @@ void Dialog::clear()
 	m_sentences.clear();
 }
 
-Dialog::SentenceItr Dialog::cbegin() const
+size_t Dialog::getSentenceCount() const
 {
-	return m_sentences.cbegin();
+	return m_sentences.size();
 }
 
-Dialog::SentenceItr Dialog::cend() const
+Sentence Dialog::operator[](size_t index) const
 {
-	return m_sentences.cend();
+	if (index >= m_sentences.size())
+	{
+		assert(false); return Sentence();
+	}
+
+	return m_sentences[index];
 }

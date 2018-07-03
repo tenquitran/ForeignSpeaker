@@ -7,6 +7,11 @@ using namespace ForeignSpeakerApp;
 
 //////////////////////////////////////////////////////////////////////////
 
+// "Exit application" event.
+CHandle g_hExitEvent;
+
+//////////////////////////////////////////////////////////////////////////
+
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPTSTR lpCmdLine, _In_ int nCmdShow)
 {
@@ -18,7 +23,14 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
 	std::wcout.rdbuf(out.rdbuf());
 	std::wcerr.rdbuf(out.rdbuf());
 
-	int ret = {};
+	g_hExitEvent.Attach(CreateEvent(nullptr, TRUE, FALSE, nullptr));
+	if (!g_hExitEvent)
+	{
+		std::wcerr << L"App exit event: CreateEvent() failed: " << GetLastError() << '\n';
+		assert(false); return 1;
+	}
+
+	int res = 1;
 
 	try
 	{
@@ -27,7 +39,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
 
 		MainWindow mainWindow(hInstance, nCmdShow, Width, Height);
 
-		ret = mainWindow.runMessageLoop();
+		res = mainWindow.runMessageLoop();
 	}
 	catch (const Exception& ex)
 	{
@@ -40,5 +52,5 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
 		assert(false);
 	}
 
-	return ret;
+	return res;
 }
