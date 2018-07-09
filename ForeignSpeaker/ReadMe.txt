@@ -34,6 +34,6 @@ B: Fine, thanks! And you?
 ---------------------------------------------------------
 
 TODO:
-- add speech synthesis
+- add GUI controls
 - add random dialog selection
 - add logging of major successful events (the end of files parsing, etc.)

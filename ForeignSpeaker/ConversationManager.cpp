@@ -54,6 +54,8 @@ DWORD WINAPI ConversationManager::threadProcParse(PVOID pParam)
 
 DWORD ConversationManager::threadProcParse()
 {
+	std::wcout << L"Starting to parse the dialog files...\n";
+
 	// TODO: report progress (directory name or path, etc.)
 
 	// TODO: hard-coded path
@@ -63,11 +65,6 @@ DWORD ConversationManager::threadProcParse()
 	{
 		std::wcerr << L"Failed to parse dialog files: " << dirPath << '\n';
 		return 1;
-	}
-
-	if (WAIT_TIMEOUT != WaitForSingleObject(g_hExitEvent, 0))
-	{
-		return 0;    // not an error
 	}
 
 	return 0;
@@ -94,7 +91,7 @@ void ConversationManager::playDialog(const Dialog& dlg) const
 		else
 		{
 			// TODO: wait for the user to answer
-			;
+			int tmp = 1;
 		}
 	}
 }

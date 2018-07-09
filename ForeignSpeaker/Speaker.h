@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sapi.h>
+
 
 namespace ForeignSpeakerApp
 {
@@ -13,6 +15,6 @@ namespace ForeignSpeakerApp
 		void speak(const std::wstring& phrase) const;
 
 	private:
-		;
+		CComPtr<ISpVoice> m_spVoice;
 	};
 }

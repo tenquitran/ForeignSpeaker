@@ -17,6 +17,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(nCmdShow);
 
 	// Redirect output from std::cout and std::cerr to the log file.
 	std::wofstream out("log.txt");
@@ -30,16 +31,20 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
 		assert(false); return 1;
 	}
 
+	HRESULT hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+	if (FAILED(hr))
+	{
+		std::wcerr << L"CoInitializeEx() failed: 0x" << std::hex << hr << '\n';
+		assert(false); return 1;
+	}
+
 	int res = 1;
 
 	try
 	{
-		const int Width  = 400;
-		const int Height = 300;
+		MainWindow mainWindow(hInstance);
 
-		MainWindow mainWindow(hInstance, nCmdShow, Width, Height);
-
-		res = mainWindow.runMessageLoop();
+		res = 0;
 	}
 	catch (const Exception& ex)
 	{
@@ -51,6 +56,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstanc
 		std::wcerr << L"memalloc failure\n";
 		assert(false);
 	}
+
+	CoUninitialize();
 
 	return res;
 }
